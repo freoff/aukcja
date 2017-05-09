@@ -15,5 +15,5 @@ router.post('/nowa',upload.single('plik'), (req,res,next)=>{
      res.json({body:req.body,file:req.file});
 });
 router.post('/nowa/obrazek/:aukcjaId',(req,res,next)=>{
-    
+    res.status(200).json('ok');
 });
