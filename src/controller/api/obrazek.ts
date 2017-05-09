@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as multer from 'multer';
 
-const router = express.Router();
+export const router = express.Router();
 let upload;
 
 router.post('/temp',function(req,res,next) {
@@ -11,4 +11,11 @@ router.post('/temp',function(req,res,next) {
     res.json({file:req.file.path});
   });
 
+});
+
+router.get('/',function(req,res,next) {
+  //TODO implements api/aukcja/
+
+
+  return res.status(200).json('ok');
 })

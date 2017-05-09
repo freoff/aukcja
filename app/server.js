@@ -10,6 +10,7 @@ exports.morganEnable = function () {
     exports.app.use(morgan('dev'));
 };
 exports.app = express();
+console.log(exports.app.get('env'));
 var server = exports.app.listen(3000, function (req, res) {
 });
 server.on('listening', function () {
@@ -19,7 +20,8 @@ exports.app.set('views', path.join(__dirname, 'views'));
 exports.app.set('view engine', 'pug');
 exports.app.locals.basedir = exports.app.get('views');
 exports.app.locals.pretty = true;
-exports.app.use(morgan('dev'));
+if (exports.app.get('env') !== 'test')
+    exports.app.use(morgan('dev'));
 exports.app.use(express.static(path.join(__dirname, 'static')));
 exports.app.use(bodyparser.urlencoded({ extended: true }));
 exports.app.use(bodyparser.json({ type: 'application/json' }));

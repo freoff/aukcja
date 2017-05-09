@@ -23,10 +23,10 @@ function sendFile(file) {
   let nowaAukcjaId = $('[name]="aukcjaId"').val();
   let formData = new FormData();
   formData.append('plik', file, file.name);
-  formData.append('plik[id]',file.id);
-  formData.append('plik[aukcjaId]', nowaAukcjaId);
+  formData.append('plik-id',file.id);
+  formData.append('aukcjaId', nowaAukcjaId);
   $.ajax({
-    url:'/api/obrazek/nowaAukcjaId/',
+    url:'/api/obrazek/doAukcji/:aukcjaId/',
     method:'post',
     data:formData
     

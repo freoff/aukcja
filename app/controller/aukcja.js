@@ -13,5 +13,6 @@ exports.router.post('/nowa', upload.single('plik'), function (req, res, next) {
     res.json({ body: req.body, file: req.file });
 });
 exports.router.post('/nowa/obrazek/:aukcjaId', function (req, res, next) {
+    res.status(200).json('ok');
 });
 //# sourceMappingURL=aukcja.js.map

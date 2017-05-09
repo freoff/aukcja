@@ -8,3 +8,7 @@ export const router = express.Router();
 router.get('/',(req:Request,res: Response,next)=>{
     res.status(200).json('ok');
 });//
+
+router.post('/nowa',(req,res,next)=>{
+    res.send('ok');
+});
