@@ -6,7 +6,7 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, 'src','static','js')
+    path: path.join(__dirname, 'app','static','js')
   },
   devtool:'eval'
 

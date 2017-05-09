@@ -14,7 +14,7 @@ gulp.task('syncFile', function () {
             printSummary: true
         }));
 });
-gulp.task('default', function () {
+gulp.task('default',['syncFile'], function () {
     gulp.watch(['src/views/**/*', 'src/static/**/*'], ['syncFile']);
     
 
