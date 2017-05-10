@@ -26,10 +26,17 @@ function sendFile(file) {
   formData.append('plik-id',file.id);
   formData.append('aukcjaId', nowaAukcjaId);
   $.ajax({
-    url:'/api/obrazek/doAukcji/:aukcjaId/',
-    method:'post',
-    data:formData
-    
+    url:'/api/obrazek/nowaAukcja/' + aukcjaId,
+    method:'put',
+    data:formData,
+    processData:false,
+    success:function(data, textStatus, jqXHR){
+
+    },
+    error:function(jqXHR, textStatus, errorThrown){
+      
+    }
+
   });
 };
 
