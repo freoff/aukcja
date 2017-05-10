@@ -1,12 +1,13 @@
 import * as aws from "aws-sdk";
 import * as shortid from "shortid";
 import { Options } from 'multer';
+import * as os from 'os';
 export class Config {
     public static SIZE_1MB: number = 1024 * 1024;
     public static SIZE_10MB: number = 1024 * 1024 * 10;
     public static BUCKET: string = 'freo.aukcja';
     public static multerproperties: Options = {
-        dest:'/home/freo/ws/temp/aukcje'
+        dest:os.tmpdir()
     }
     public static Key() {
         return shortid.generate();

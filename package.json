@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "export NODE_ENV=test; mocha test/**/*.js",
-    "nodemon": "nodemon app/server"
+    "nodemon": "nodemon app/server",
+    "init": "npm install && tsc && webpack && gulp syncFile"
   },
   "keywords": [],
   "author": "",

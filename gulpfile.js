@@ -1,3 +1,4 @@
+/*eslint-env node */
 const gulp = require('gulp');
 const sync = require('gulp-directory-sync');
 const debug = require('gulp-debug');
@@ -16,7 +17,7 @@ gulp.task('syncFile', function () {
 });
 gulp.task('default',['syncFile'], function () {
     gulp.watch(['src/views/**/*', 'src/static/**/*'], ['syncFile']);
-    
+        
 
 });
 gulp.task('tscompile', function () {
