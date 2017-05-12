@@ -6,6 +6,7 @@ export class Config {
     public static SIZE_1MB: number = 1024 * 1024;
     public static SIZE_10MB: number = 1024 * 1024 * 10;
     public static BUCKET: string = 'freo.aukcja';
+    public static MONGO_URL:string = 'mongodb://127.0.0.1:22222/aukcja';
     public static multerproperties: Options = {
         dest:os.tmpdir()
     }

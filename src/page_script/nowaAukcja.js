@@ -11,10 +11,10 @@ $(document).ready(() => {
 });
 $('#input-plik').on('change', e => {
   for (let file of e.target.files) {
-    
+    fileList.push(file);
     file.id = id.generate();
     extractFileImage(file);
-    
+    console.log(fileList);
   }
 
 });
@@ -23,7 +23,7 @@ function sendFile(file) {
   let nowaAukcjaId = $('[name]="aukcjaId"').val();
   let formData = new FormData();
   formData.append('plik', file, file.name);
-  formData.append('plik-id',file.id);
+  formData.append('plikiId',file.id);
   formData.append('aukcjaId', nowaAukcjaId);
   $.ajax({
     url:'/api/obrazek/nowaAukcja/' + aukcjaId,

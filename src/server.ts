@@ -4,17 +4,26 @@ import * as path from "path";
 import * as bodyparser from "body-parser";
 import { router as api } from "./controller/api";
 import { router as aukcja } from "./controller/aukcja";
-
+import { Mongo } from './db/mongo';
 export const morganEnable = function () {
     app.use(morgan('dev'));
 }
 export const app = express();
-console.log(app.get('env'));
-const server = app.listen(3000, function (req, res) {
+let server;
+const mongo = new Mongo(app);
+mongo.getConnection((err, db) => {
+    console.log('Db "' + db.s.databaseName +'" started');
+    app.locals.db = db;
+    server = app.listen(3000, function (req, res) {
+    });
+    server.on('listening', () => {
+        console.log(`RUN:   http://localhost:${server.address().port} `);
+    });
 });
-server.on('listening', () => {
-    console.log(`RUN:   http://localhost:${server.address().port} `);
-})
+
+console.log(app.get('env'));
+
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

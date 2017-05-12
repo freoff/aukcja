@@ -24,7 +24,7 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceRoot}/test"
+        "${file}"
       ],
       "internalConsoleOptions": "openOnSessionStart"
     },
