@@ -5,16 +5,22 @@ import * as bodyparser from "body-parser";
 import { router as api } from "./controller/api";
 import { router as aukcja } from "./controller/aukcja";
 import { Mongo } from './db/mongo';
+import { Config } from './config/config';
+
 export const morganEnable = function () {
     app.use(morgan('dev'));
 }
 export const app = express();
+
 let server;
 const mongo = new Mongo(app);
 mongo.getConnection((err, db) => {
+    
     console.log('Db "' + db.s.databaseName +'" started');
     app.locals.db = db;
-    server = app.listen(3000, function (req, res) {
+    Config.db = db;
+    
+    server = app.listen(Config.PORT, function (req, res) {
     });
     server.on('listening', () => {
         console.log(`RUN:   http://localhost:${server.address().port} `);

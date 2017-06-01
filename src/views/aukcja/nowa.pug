@@ -7,7 +7,7 @@ block content
             form(action='/aukcja/nowa/', method='POST', enctype='multipart/form-data')
                 .form-group
                     input(type='hidden', name='aukcjaId', value=aukcjaId)
-                    label(for='input-tutul') Tytuł aukcji
+                    label(for='input-tytul') Tytuł aukcji
                     input#input-tytul.form-control(name='tytul',placeholder='Tytuł aukcji')
                     p.text-danger.hidden-xs-up
                 .form-group

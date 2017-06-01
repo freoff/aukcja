@@ -14,25 +14,28 @@ describe('Test api obrazek', function () {
   let pathToFile = path.resolve(path.join(__dirname, '../../helper/image.jpg'));
   let fstat = fs.lstatSync(pathToFile);
   let AUKCJA_ID =
-    before(function (done) {
-      AUKCJA_ID = id.generate();
-      mongo.connect('mongodb://127.0.0.1:22222/aukcja');
-      mongo.collection('NowaAukcja').insertOne({
-        aukcjaId: AUKCJA_ID,
-        obrazki: []
-      }, function (err, data) {
-        done(err);
-      });
-    });
+    // before(function (done) {
+    //   AUKCJA_ID = id.generate();
+    //   mongo.connect('mongodb://127.0.0.1:22222/aukcja',function(err,db){
+    //     db.collection('NowaAukcja').insertOne({
+    //     aukcjaId: AUKCJA_ID,
+    //     obrazki: []
+    //   }, function (err, data) {
+    //     console.log(data);
+    //     done(err);
+    //   });
+    //   });
+      
+    // });
 
 
   it('Test put to new aukcja ', function (done) {
     chai.request(app).put('/api/obrazek/nowaAukcja/12345')
       .attach('plik', pathToFile, 'filename')
-      .field('aukcjaId', AUKCJA_ID)
+      
       .end(function (err, res) {
         if (err) done(err);
-        
+        res.status.should.be.lt(400);
         done();
       });
 

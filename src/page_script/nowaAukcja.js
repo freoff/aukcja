@@ -11,30 +11,35 @@ $(document).ready(() => {
 });
 $('#input-plik').on('change', e => {
   for (let file of e.target.files) {
-    fileList.push(file);
     file.id = id.generate();
+    console.log(file);
+    fileList.push(file);
+    
     extractFileImage(file);
+    sendFile(file);
     console.log(fileList);
   }
 
 });
 
 function sendFile(file) {
-  let nowaAukcjaId = $('[name]="aukcjaId"').val();
+  let nowaAukcjaId = $('[name="aukcjaId"]').val();
   let formData = new FormData();
   formData.append('plik', file, file.name);
-  formData.append('plikiId',file.id);
+  formData.append('plikId',file.id);
   formData.append('aukcjaId', nowaAukcjaId);
   $.ajax({
-    url:'/api/obrazek/nowaAukcja/' + aukcjaId,
+    url:'/api/obrazek/nowaAukcja/' + nowaAukcjaId,
     method:'put',
     data:formData,
+    contentType:false,
     processData:false,
+    
     success:function(data, textStatus, jqXHR){
-
+      console.log(data);
     },
     error:function(jqXHR, textStatus, errorThrown){
-      
+      console.log(jqXHR);
     }
 
   });
@@ -53,6 +58,7 @@ function extractFileImage(file) {
               <button type='button' class='align-middle btn-error'
               onclick="$('#thumb-${file.id}').remove()">
               <span class='fa fa-close text-warning'></span>
+              
               </button>
 
             </div>
@@ -61,7 +67,7 @@ function extractFileImage(file) {
           `
 
       ).appendTo($('#plik-Placeholder'));
-      fileList.push(file.id);
+      
     }
   });
   fileReader.readAsDataURL(file);

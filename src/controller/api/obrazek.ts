@@ -4,12 +4,15 @@ import { Config } from '../../config/config';
 import * as os from 'os';
 import * as sharp from 'sharp';
 import * as mongo from 'mongodb';
-
+import * as httpstatus from 'statuses';
 export const router = express.Router();
 let upload = multer({
-  dest: os.tmpdir(), limits: Config.SIZE_10MB, fileFilter: function (req, file, cb) {
-    cb(null, (file.mimetype.startsWith('image', 0)));
-  }
+  dest: os.tmpdir(),
+  limits: Config.SIZE_10MB
+  // ,
+  // fileFilter: function (req, file, cb) {
+  //   cb(null, (file.mimetype.startsWith('image', 0)));
+  // }
 });
 
 router.post('/temp', function (req, res, next) {
@@ -25,7 +28,7 @@ router.get('/', function (req, res, next) {
 router.put('/nowaAukcja/:aukcjaId', upload.single('plik'), (req, res, next) => {
   console.log(req.file);
   if (req.file === undefined)
-    res.status(412).json(new Error('barak pliku'));
+    res.status(412).json('barak pliku');
   else {
     sharp(req.file.path).metadata((err, metadata) => {
       if (err)
@@ -37,8 +40,8 @@ router.put('/nowaAukcja/:aukcjaId', upload.single('plik'), (req, res, next) => {
           orientation: metadata.orientation,
           plikId: req.body.plikId
         };
-        let collection = req.app.locals.db.collection('TempAukcja');
-        collection.findOneAndUpdate()
+        let collection = req.app.locals.db.collection('Aukcja');
+        // collection.findOneAndUpdate({aukcjaId:nowaaukcja.aukcjaId},{})
         res.status(201).json(nowaaukcja);
       }
     });
