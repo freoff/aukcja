@@ -8,7 +8,7 @@ export class AukcjaRepo {
    }
 
   addImage(obj: PutObrazek){
-    this.db.connect()
+    
     //TODO implement it
   }
 }

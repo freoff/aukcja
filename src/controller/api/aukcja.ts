@@ -37,11 +37,11 @@ router.route('/:aukcjaId/obrazek/:obrazekId')
     .put(upload.single('plik'), (req, res, next) => {
         let file: FileToUpload = req.file;
         if (file === undefined) {
-            res.status(412).json('Brak pliku');
+            res.status(412).json('_412_Precondition failed Brak pliku');
         } else {
             let sharpfile = sharp(file.path);
             sharpfile.metadata((err, metadata) => {
-                if (err) res.status(415).json('To nie zdjecie');
+                if (err) res.status(415).json('_415_Unsuported media typeTo nie zdjecie');
                 else {
                     file.id = req.params.obrazekId;
                     file.orientation = metadata.orientation;
@@ -51,7 +51,7 @@ router.route('/:aukcjaId/obrazek/:obrazekId')
                     fileService.resize().then(fileService.uploadToS3).then(console.log).catch(console.log);
 
                     // fileService.resize().then(fileService.uploadToS3).then(console.log).catch(console.log);
-                    res.json({fileId: file.id, fileUrl: file.url ? '' : 'nourl'});
+                    res.json(file);
 
                 }
             });
